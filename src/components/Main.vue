@@ -1,74 +1,34 @@
 <template>
   <main>
-    <div class="container-title">
-      <ul>
-        <li v-for="(title, index) in titles" :key="index">
-          <h1>{{ title.title }}</h1>
-          <h1>{{ title.original_title }}</h1>
-          <h1>{{ title.original_language }}</h1>
-          <h1>{{ title.vote_average }}</h1>
-        </li>
-      </ul>
+    <div class="container-fluid d-flex flex-wrap">
+      <div v-for="(title, index) in titles" :key="index" class="box p-3">
+        <h2>Titolo:</h2>
+        <p>{{ title.title }}</p>
+        <h2>Titolo Originale:</h2>
+        <p>{{ title.original_title }}</p>
+        <h2>Lingua:</h2>
+        <p>{{ title.original_language }}</p>
+        <h2>Voto:</h2>
+        <p>{{ title.vote_average }}</p>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Main",
   components: {},
   data() {
-    return {
-      apiKey: "84e9c8b19a36589396bf63537bcc1640",
-      queryApi: "https://api.themoviedb.org/3/search/movie",
-      //   queryApi:
-      //     "https://api.themoviedb.org/3/search/movie?api_key=84e9c8b19a36589396bf63537bcc1640&query=inception",
-      titles: null,
-      textInput: "",
-    };
+    return {};
   },
-  props: {
-    value: {
-      type: String,
-    },
-  },
-  methods: {
-    getTitles() {
-      if (this.value !== "") {
-        this.titles = null;
-        axios
-          .get(this.queryApi, {
-            params: {
-              api_key: this.apiKey,
-              query: this.value,
-            },
-          })
-          .then((result) => {
-            console.log(result);
-            this.titles = result.data.results;
-            console.log(this.titles);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    },
-  },
-  created() {
-    this.getTitles();
-  },
-  computed: {
-    changeValue() {
-      if (this.value === "") {
-        return this.titles;
-      } else {
-        return this.titles.filter((title) => (title.title = this.value));
-      }
-    },
-  },
+  props: ["titles"],
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.box {
+  border: 2px solid black;
+  width: calc(100% / 4);
+}
+</style>

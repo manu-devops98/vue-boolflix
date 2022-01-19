@@ -1,5 +1,7 @@
 <template>
-  <header>
+  <header
+    class="container-fluid d-flex justify-content-between align-items-center"
+  >
     <Search @doInput="searchTitles($event)" />
   </header>
 </template>
@@ -28,11 +30,6 @@ export default {
 <style lang="scss">
 header {
   height: 80px;
-  .input-container {
-    .form-control {
-      width: 20%;
-      padding: 0;
-    }
-  }
+  background-color: black;
 }
 </style>

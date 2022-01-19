@@ -1,8 +1,5 @@
 <template>
-  <div class="input-container">
-    <label for="exampleFormControlInput1" class="form-label"
-      >Cerca titoli</label
-    >
+  <div class="container d-flex justify-content-between">
     <input
       v-model="inputValue"
       type="text"
@@ -32,10 +29,10 @@ export default {
 </script>
 
 <style lang="scss">
-.input-container {
+.container {
   .form-control {
-    width: 20%;
-    padding: 0;
+    width: 70%;
+    padding: 10px;
   }
 }
 </style>

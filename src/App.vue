@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Header @doTitle="doSearch($event)" />
-    <Main :value="inputValue" />
-    <!-- @apiCall="printTitle($event)" -->
+    <Header @doTitle="getTitles($event)" />
+    <Main :titles="titles" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import Header from "./components/Header.vue";
 import Main from "./components/Main.vue";
 
@@ -14,8 +14,10 @@ export default {
   name: "App",
   data() {
     return {
-      inputValue: "",
-      titles: [],
+      apiKey: "84e9c8b19a36589396bf63537bcc1640",
+      queryApi:
+        "https://api.themoviedb.org/3/search/movie?api_key=84e9c8b19a36589396bf63537bcc1640&query=",
+      titles: null,
     };
   },
   components: {
@@ -23,14 +25,19 @@ export default {
     Main,
   },
   methods: {
-    doSearch(value) {
-      this.inputValue = value;
-      console.log(this.inputValue);
+    getTitles(value) {
+      this.titles = null;
+      axios
+        .get(this.queryApi + value)
+        .then((result) => {
+          console.log(result);
+          this.titles = result.data.results;
+          console.log(this.titles);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    // printTitle(array) {
-    //   this.titles = array;
-    //   console.log(this.titles);
-    // },
   },
 };
 </script>

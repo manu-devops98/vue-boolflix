@@ -8,6 +8,7 @@
       type="text"
       class="form-control"
       id="exampleFormControlInput1"
+      placeholder="Cerca.."
     />
     <button
       @click="$emit('doInput', inputValue)"

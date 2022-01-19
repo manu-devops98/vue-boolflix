@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Header @doTitle="doSearch($event)" />
-    <Main @apiCall="printTitle($event)" :value="inputValue" />
+    <Main :value="inputValue" />
+    <!-- @apiCall="printTitle($event)" -->
   </div>
 </template>
 
@@ -26,10 +27,10 @@ export default {
       this.inputValue = value;
       console.log(this.inputValue);
     },
-    printTitle(array) {
-      this.titles = array;
-      console.log(this.titles);
-    },
+    // printTitle(array) {
+    //   this.titles = array;
+    //   console.log(this.titles);
+    // },
   },
 };
 </script>

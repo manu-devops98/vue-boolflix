@@ -23,6 +23,8 @@ export default {
     return {
       apiKey: "84e9c8b19a36589396bf63537bcc1640",
       queryApi: "https://api.themoviedb.org/3/search/movie",
+      //   queryApi:
+      //     "https://api.themoviedb.org/3/search/movie?api_key=84e9c8b19a36589396bf63537bcc1640&query=inception",
       titles: null,
       textInput: "",
     };
@@ -33,40 +35,38 @@ export default {
     },
   },
   methods: {
-    searchInput() {
-      if (this.value == "") {
-        return this.textInput;
-      } else {
-        return (this.textInput = this.value);
-      }
-    },
     getTitles() {
-      this.titles = null;
-      axios
-        .get(this.queryApi, {
-          params: {
-            apy_key: this.apiKey,
-            query: this.textInput,
-          },
-        })
-        .then((result) => {
-          console.log(result);
-          this.titles = result.data.results;
-          console.log(this.titles);
-          console.log(this.queryApi);
-          console.log("valueee", this.value);
-          this.$emit("apiCall", this.titles);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.value !== "") {
+        this.titles = null;
+        axios
+          .get(this.queryApi, {
+            params: {
+              api_key: this.apiKey,
+              query: this.value,
+            },
+          })
+          .then((result) => {
+            console.log(result);
+            this.titles = result.data.results;
+            console.log(this.titles);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
   created() {
-    this.searchInput();
-  },
-  mounted() {
     this.getTitles();
+  },
+  computed: {
+    changeValue() {
+      if (this.value === "") {
+        return this.titles;
+      } else {
+        return this.titles.filter((title) => (title.title = this.value));
+      }
+    },
   },
 };
 </script>

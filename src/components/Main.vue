@@ -29,8 +29,12 @@
             "
           ></i>
           <h2>Voto:</h2>
-          <p>{{ numbInteger(film.vote_average) }}</p>
-          <font-awesome-icon icon="star" />
+          <font-awesome-icon
+            icon="star"
+            v-for="(star, index) in 5"
+            :key="index"
+            :class="starActive(numbInteger(film.vote_average), index)"
+          />
         </div>
       </div>
       <div class="container-serie w-100">
@@ -61,19 +65,16 @@
             "
           ></i>
           <h2>Voto:</h2>
-          <!-- <p>{{ serie.vote_average }}</p> -->
-          <p>{{ numbInteger(serie.vote_average) }}</p>
           <font-awesome-icon
             icon="star"
             v-for="(star, index) in 5"
             :key="index"
-            :class="starActive(numbInteger(serie.vote_average))"
+            :class="starActive(numbInteger(serie.vote_average), index)"
           />
         </div>
       </div>
     </div>
   </main>
-  <!-- // :class="numbInteger(serie.vote_average) > 0 ? 'active' : ''" -->
 </template>
 <script>
 export default {
@@ -84,7 +85,6 @@ export default {
       sizeImage: "w342",
       imageUrl: "https://image.tmdb.org/t/p/",
       defaultImage: "https://picsum.photos/350/500",
-      starCount: 0,
     };
   },
   props: ["films", "series"],
@@ -92,10 +92,8 @@ export default {
     numbInteger(number) {
       return Math.round(number / 2);
     },
-    starActive(number) {
-      this.count = 0;
-      while (!this.count == number) {
-        this.count++;
+    starActive(number, index) {
+      while (number > index) {
         return "active";
       }
     },

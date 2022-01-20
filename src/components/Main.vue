@@ -1,15 +1,21 @@
 <template>
   <main>
     <div class="container-fluid d-flex flex-wrap">
-      <div v-for="(title, index) in titles" :key="index" class="box p-3">
+      <div v-for="(film, index) in films" :key="index" class="box p-3">
         <h2>Titolo:</h2>
-        <p>{{ title.title }}</p>
+        <p>{{ film.title }}</p>
         <h2>Titolo Originale:</h2>
-        <p>{{ title.original_title }}</p>
+        <p>{{ film.original_title }}</p>
         <h2>Lingua:</h2>
-        <p>{{ title.original_language }}</p>
+        <i
+          :class="
+            film.original_language == 'en'
+              ? 'flag flag-us'
+              : `flag flag-${film.original_language}`
+          "
+        ></i>
         <h2>Voto:</h2>
-        <p>{{ title.vote_average }}</p>
+        <p>{{ film.vote_average }}</p>
       </div>
     </div>
   </main>
@@ -22,11 +28,12 @@ export default {
   data() {
     return {};
   },
-  props: ["titles"],
+  props: ["films"],
 };
 </script>
 
 <style lang="scss">
+@import "~mdb-ui-kit/css/mdb.min.css";
 .box {
   border: 2px solid black;
   width: calc(100% / 4);

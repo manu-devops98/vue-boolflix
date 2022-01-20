@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header @doTitle="getTitles($event)" />
-    <Main :titles="titles" />
+    <Header @doTitle="search($event)" />
+    <Main :films="films" />
   </div>
 </template>
 
@@ -15,9 +15,10 @@ export default {
   data() {
     return {
       apiKey: "84e9c8b19a36589396bf63537bcc1640",
-      queryApi:
-        "https://api.themoviedb.org/3/search/movie?api_key=84e9c8b19a36589396bf63537bcc1640&query=",
-      titles: null,
+      queryApi: "https://api.themoviedb.org/3/search/",
+      inputValue: "",
+      language: "it-IT",
+      films: null,
     };
   },
   components: {
@@ -25,14 +26,26 @@ export default {
     Main,
   },
   methods: {
-    getTitles(value) {
-      this.titles = null;
+    search(text) {
+      this.inputValue = text;
+      this.getFilms();
+    },
+    getFilms() {
+      this.films = null;
+      const endpoint = "movie";
+      const parameters = {
+        api_key: this.apiKey,
+        language: this.language,
+        query: this.inputValue,
+      };
       axios
-        .get(this.queryApi + value)
+        .get(`${this.queryApi}${endpoint}`, {
+          params: parameters,
+        })
         .then((result) => {
           console.log(result);
-          this.titles = result.data.results;
-          console.log(this.titles);
+          this.films = result.data.results;
+          console.log(this.films);
         })
         .catch((error) => {
           console.log(error);

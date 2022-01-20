@@ -63,36 +63,41 @@
           <h2>Voto:</h2>
           <!-- <p>{{ serie.vote_average }}</p> -->
           <p>{{ numbInteger(serie.vote_average) }}</p>
-          <font-awesome-icon icon="star" class="active" />
+          <font-awesome-icon
+            icon="star"
+            v-for="(star, index) in 5"
+            :key="index"
+            :class="starActive(numbInteger(serie.vote_average))"
+          />
         </div>
       </div>
     </div>
   </main>
+  <!-- // :class="numbInteger(serie.vote_average) > 0 ? 'active' : ''" -->
 </template>
-
 <script>
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
-// library.add(faUserSecret);
-
 export default {
   name: "Main",
-  components: {
-    // FontAwesomeIcon,
-  },
+  components: {},
   data() {
     return {
       sizeImage: "w342",
       imageUrl: "https://image.tmdb.org/t/p/",
       defaultImage: "https://picsum.photos/350/500",
+      starCount: 0,
     };
   },
   props: ["films", "series"],
   methods: {
     numbInteger(number) {
       return Math.round(number / 2);
+    },
+    starActive(number) {
+      this.count = 0;
+      while (!this.count == number) {
+        this.count++;
+        return "active";
+      }
     },
   },
 };

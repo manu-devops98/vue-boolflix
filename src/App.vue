@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @doTitle="search($event)" />
-    <Main :films="films" />
+    <Main :films="films" :series="series" />
   </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
       inputValue: "",
       language: "it-IT",
       films: null,
+      series: null,
     };
   },
   components: {
@@ -29,6 +30,7 @@ export default {
     search(text) {
       this.inputValue = text;
       this.getFilms();
+      this.getSeries();
     },
     getFilms() {
       this.films = null;
@@ -46,6 +48,27 @@ export default {
           console.log(result);
           this.films = result.data.results;
           console.log(this.films);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getSeries() {
+      this.series = null;
+      const endpoint = "tv";
+      const parameters = {
+        api_key: this.apiKey,
+        language: this.language,
+        query: this.inputValue,
+      };
+      axios
+        .get(`${this.queryApi}${endpoint}`, {
+          params: parameters,
+        })
+        .then((result) => {
+          console.log(result);
+          this.series = result.data.results;
+          console.log(this.series);
         })
         .catch((error) => {
           console.log(error);

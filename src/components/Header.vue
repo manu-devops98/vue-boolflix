@@ -1,6 +1,9 @@
 <template>
   <header class="container-fluid">
-    <Search @doInput="searchTitles($event)" />
+    <Search
+      @doInput="searchTitles($event)"
+      @enterInput="searchTitles($event)"
+    />
   </header>
 </template>
 
@@ -20,6 +23,7 @@ export default {
     searchTitles(text) {
       this.inputValue = text;
       this.$emit("doTitle", this.inputValue);
+      this.$emit("enterTitle", this.inputValue);
     },
   },
 };

@@ -10,6 +10,7 @@
         class="form-control"
         id="exampleFormControlInput1"
         placeholder="Cerca.."
+        @keyup.enter="$emit('enterInput', inputValue)"
       />
       <button
         @click="$emit('doInput', inputValue)"

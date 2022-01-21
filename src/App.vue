@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header @doTitle="search($event)" />
+    <Header @doTitle="search($event)" @enterTitle="search($event)" />
     <Main :films="films" :series="series" />
   </div>
 </template>
@@ -78,6 +78,27 @@ export default {
           });
       }
     },
+    // defaultValue() {
+    //   this.defaultFilms = null;
+    //   const endpoint = "movie";
+    //   const parameters = {
+    //     api_key: this.apiKey,
+    //     language: this.language,
+    //     query: "marvel",
+    //   };
+    //   axios
+    //     .get(`${this.queryApi}${endpoint}`, {
+    //       params: parameters,
+    //     })
+    //     .then((result) => {
+    //       console.log(result);
+    //       this.defaultFilms = result.data.results;
+    //       console.log(this.defaultFilms);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
 };
 </script>

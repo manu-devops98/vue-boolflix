@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex justify-content-between">
+  <div class="container-fluid d-flex justify-content-between">
     <input
       v-model="inputValue"
       type="text"
@@ -29,10 +29,11 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.container-fluid {
   .form-control {
-    width: 70%;
+    width: 100%;
     padding: 10px;
+    margin-right: 20px;
   }
 }
 </style>

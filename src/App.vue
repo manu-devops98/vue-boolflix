@@ -80,6 +80,5 @@ export default {
 
 <style lang="scss">
 @import "~bootstrap/scss/bootstrap";
-#app {
-}
+@import "./assets/scss/style.scss";
 </style>

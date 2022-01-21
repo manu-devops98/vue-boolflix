@@ -1,6 +1,6 @@
 <template>
   <main class="">
-    <div class="container">
+    <div class="container mt-5">
       <div class="row row-cols-6">
         <div v-if="films" class="col-12">
           <h1 class="text-white mb-4">Film</h1>

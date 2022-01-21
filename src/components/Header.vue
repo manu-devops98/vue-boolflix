@@ -1,7 +1,5 @@
 <template>
-  <header
-    class="container-fluid d-flex justify-content-between align-items-center"
-  >
+  <header class="container-fluid">
     <Search @doInput="searchTitles($event)" />
   </header>
 </template>

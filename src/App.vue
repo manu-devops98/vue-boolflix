@@ -33,46 +33,50 @@ export default {
       this.getSeries();
     },
     getFilms() {
-      this.films = null;
-      const endpoint = "movie";
-      const parameters = {
-        api_key: this.apiKey,
-        language: this.language,
-        query: this.inputValue,
-      };
-      axios
-        .get(`${this.queryApi}${endpoint}`, {
-          params: parameters,
-        })
-        .then((result) => {
-          console.log(result);
-          this.films = result.data.results;
-          console.log(this.films);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (!(this.inputValue == "")) {
+        this.films = null;
+        const endpoint = "movie";
+        const parameters = {
+          api_key: this.apiKey,
+          language: this.language,
+          query: this.inputValue,
+        };
+        axios
+          .get(`${this.queryApi}${endpoint}`, {
+            params: parameters,
+          })
+          .then((result) => {
+            console.log(result);
+            this.films = result.data.results;
+            console.log(this.films);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
     getSeries() {
-      this.series = null;
-      const endpoint = "tv";
-      const parameters = {
-        api_key: this.apiKey,
-        language: this.language,
-        query: this.inputValue,
-      };
-      axios
-        .get(`${this.queryApi}${endpoint}`, {
-          params: parameters,
-        })
-        .then((result) => {
-          console.log(result);
-          this.series = result.data.results;
-          console.log(this.series);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (!(this.inputValue == "")) {
+        this.series = null;
+        const endpoint = "tv";
+        const parameters = {
+          api_key: this.apiKey,
+          language: this.language,
+          query: this.inputValue,
+        };
+        axios
+          .get(`${this.queryApi}${endpoint}`, {
+            params: parameters,
+          })
+          .then((result) => {
+            console.log(result);
+            this.series = result.data.results;
+            console.log(this.series);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
 };

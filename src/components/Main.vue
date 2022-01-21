@@ -1,6 +1,6 @@
 <template>
   <main class="">
-    <div class="container mt-5">
+    <div v-if="films" class="container mt-5">
       <div class="row row-cols-6">
         <div v-if="films" class="col-12">
           <h1 class="text-white mb-4">Film</h1>
@@ -27,10 +27,18 @@
                       Titolo film:
                       <span class="fw-normal">{{ film.title }}</span>
                     </p>
-                    <p class="fw-bold">
+                  </li>
+                  <li>
+                    <p
+                      :class="
+                        film.title == film.original_title ? 'd-none' : 'fw-bold'
+                      "
+                    >
                       Titolo originale:
                       <span class="fw-normal">{{ film.original_title }}</span>
                     </p>
+                  </li>
+                  <li>
                     <p class="fw-bold">
                       Lingua:
                       <span
@@ -43,6 +51,8 @@
                         ></i
                       ></span>
                     </p>
+                  </li>
+                  <li>
                     <p class="fw-bold">
                       Voto:
                       <span
@@ -56,6 +66,11 @@
                       /></span>
                     </p>
                   </li>
+                  <li>
+                    <p v-if="film.overview" class="fw-bold">
+                      Riassunto: <span>{{ film.overview }}</span>
+                    </p>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -66,11 +81,7 @@
           <h1 class="text-white mb-4">Serie TV</h1>
           <div class="container-serie d-flex">
             <!-- ciclo v-for su serie  -->
-            <div
-              v-for="(serie, index) in series"
-              :key="index + serie.id"
-              class="box"
-            >
+            <div v-for="(serie, index) in series" :key="index" class="box">
               <img
                 :src="
                   serie.poster_path == null
@@ -87,10 +98,18 @@
                       Titolo film:
                       <span class="fw-normal">{{ serie.name }}</span>
                     </p>
-                    <p class="fw-bold">
+                  </li>
+                  <li>
+                    <p
+                      :class="
+                        serie.name == serie.original_name ? 'd-none' : 'fw-bold'
+                      "
+                    >
                       Titolo originale:
                       <span class="fw-normal">{{ serie.original_name }}</span>
                     </p>
+                  </li>
+                  <li>
                     <p class="fw-bold">
                       Lingua:
                       <span
@@ -103,6 +122,8 @@
                         ></i
                       ></span>
                     </p>
+                  </li>
+                  <li>
                     <p class="fw-bold">
                       Voto:
                       <span
@@ -116,12 +137,20 @@
                       /></span>
                     </p>
                   </li>
+                  <li>
+                    <p class="fw-bold">
+                      Riassunto: <span>{{ serie.overview }}</span>
+                    </p>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div v-else class="text-center p-5">
+      <h1 class="text-white">Cerca titoli..</h1>
     </div>
   </main>
 </template>
@@ -173,6 +202,8 @@ main {
         &:hover {
           .info-movies {
             display: block;
+            transform: scale(1.2);
+            z-index: 10;
           }
         }
         .info-movies {
@@ -185,11 +216,15 @@ main {
           top: 0;
           left: 0;
           background-color: black;
-          p {
-            font-size: 1em;
-          }
-          span {
-            font-size: 0.8em;
+          overflow-y: scroll;
+          li {
+            margin-bottom: 0;
+            p {
+              font-size: 1em;
+            }
+            span {
+              font-size: 0.8em;
+            }
           }
         }
         .fa-star {
